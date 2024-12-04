@@ -4,13 +4,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <property name="driverClassName"  value="org.mariadb.jdbc.Driver" />
-        <property name="url" value="jdbc:mariadb://localhost:3306/db_name" />
-        <property name="username" value="db_id" />
-        <property name="password" value="db_pwd" />
+        <property name="url" value="jdbc:mariadb://walab.handong.edu:3306/OSS24_22100423" />
+        <property name="username" value="OSS24_22100423" />
+        <property name="password" value="nieJo3ch" />
     </bean>
 
-    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate" >
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
         <property name="dataSource" ref="ds" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:mappers/*-mapper.xml" />
     </bean>
 
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
 </beans>
