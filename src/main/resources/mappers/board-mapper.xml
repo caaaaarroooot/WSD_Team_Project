@@ -4,6 +4,9 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
     <select id="getBoardList" resultType="Board">
-        select * from BOARD where id = #{id}
+        select * from BOARD
     </select>
+<!--    <select id="BOARD_INSERT" resultType="void">-->
+
+<!--    </select>-->
 </mapper>

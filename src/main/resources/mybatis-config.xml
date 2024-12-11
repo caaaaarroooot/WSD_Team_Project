@@ -5,7 +5,7 @@
 <configuration>
 
     <typeAliases>
-        <typeAlias type="com.example.board.BoardVO" alias="boardList" />
+        <typeAlias type="com.example.board.BoardVO" alias="board" />
         <typeAlias type="com.example.member.MemberVO" alias="Member" />
     </typeAliases>
 </configuration>
