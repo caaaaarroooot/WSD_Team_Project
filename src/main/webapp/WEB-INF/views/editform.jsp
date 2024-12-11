@@ -9,6 +9,7 @@
 </head>
 <body>
 <h1>Edit Form</h1>
+<%--@elvariable id="boardVO" type=""--%>
 <form:form modelAttribute="boardVO" action="../editok" method="post">
     <form:hidden path="seq"/>
     <table>
