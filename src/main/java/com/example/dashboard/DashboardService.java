@@ -14,4 +14,11 @@ public class DashboardService {
         List<DashboardVO> subjects = dashboardDAO.getSubjectsByUserId(userId);
         return subjects;
     }
+
+    public List<DashboardVO> getAllSubjects() {
+        List<DashboardVO> subjects = dashboardDAO.getAllSubjects();
+        return subjects;
+    }
+
+
 }

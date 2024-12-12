@@ -7,4 +7,8 @@
         FROM user_subjects
         WHERE user_id = #{userId};
     </select>
+    <select id="getAllSubjects" resultType="com.example.dashboard.DashboardVO">
+        SELECT subject_name
+        FROM user_subjects
+    </select>
 </mapper>

@@ -22,7 +22,7 @@ public class BoardController {
     public String list(@RequestParam(value = "subjectName", required = false) String subjectName, Model model) {
         List<BoardVO> boards;
         System.out.println(subjectName);
-        if (subjectName != null && !subjectName.isEmpty()) {
+        if (subjectName != null && !subjectName.isEmpty() ) {
             boards = boardService.getBoardsBySubject(subjectName);  // 필터링된 게시물
         } else {
             boards = boardService.getBoardList();  // 전체 게시물

@@ -15,4 +15,9 @@ public class DashboardDAO {
         List<DashboardVO> subjects = sqlSession.selectList("Dashboard.getSubjectsByUserId", userId);
         return subjects;
     }
+
+    public List<DashboardVO> getAllSubjects() {
+        List<DashboardVO> subjects = sqlSession.selectList("Dashboard.getAllSubjects");
+        return subjects;
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class DashboardController {
@@ -17,7 +16,14 @@ public class DashboardController {
     @GetMapping("/dashboard")
     public ModelAndView dashboard(HttpSession session) {
         String userId = (String) session.getAttribute("userId");
-        List<DashboardVO> subjects = dashboardService.getUserSubjects(userId);
+
+        // userId가 'admin'일 경우 모든 과목을 가져옴
+        List<DashboardVO> subjects;
+        if ("admin".equals(userId)) {
+            subjects = dashboardService.getAllSubjects();  // 모든 과목을 가져옴
+        } else {
+            subjects = dashboardService.getUserSubjects(userId);  // 사용자별 과목을 가져옴
+        }
 
         int subjectsSize = (subjects != null) ? subjects.size() : 0;
 
