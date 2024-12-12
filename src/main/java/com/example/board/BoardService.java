@@ -13,6 +13,7 @@ public class BoardService {
     public List<BoardVO> getBoardList(){
         return boardDAO.getBoardList();
     }
+
 //    public int insertBoard(BoardVO vo) {return boardDAO.insertBoard(vo);}
 //    public int deleteBoard(int id) {
 //        return boardDAO.deleteBoard(id);

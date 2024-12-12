@@ -3,18 +3,31 @@ package com.example.board;
 import java.util.Date;
 
 public class BoardVO {
-	private int seq;
+	private int id;            // 기존 seq -> id로 변경
+	private String userid;     // 추가된 userid 필드
 	private String title;
-	private String writer;
-	private String content;
+	private String professor;  // 추가된 professor 필드
+	private String contents;   // 기존 content -> contents로 변경
 	private Date regdate;
-	private int cnt;
-	
-	public int getSeq() {
-		return seq;
+	private int view;          // 기존 cnt -> view로 변경
+	private int like;          // 추가된 like 필드
+	private int dislike;       // 추가된 dislike 필드
+	private boolean secret;    // 추가된 secret 필드
+	private String subject;
+
+
+	// Getter and Setter methods
+	public int getId() {
+		return id;
 	}
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public String getTitle() {
 		return title;
@@ -22,17 +35,17 @@ public class BoardVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
-		return writer;
+	public String getProfessor() {
+		return professor;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setProfessor(String professor) {
+		this.professor = professor;
 	}
-	public String getContent() {
-		return content;
+	public String getContents() {
+		return contents;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 	public Date getRegdate() {
 		return regdate;
@@ -40,10 +53,34 @@ public class BoardVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public int getCnt() {
-		return cnt;
+	public int getView() {
+		return view;
 	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setView(int view) {
+		this.view = view;
+	}
+	public int getLike() {
+		return like;
+	}
+	public void setLike(int like) {
+		this.like = like;
+	}
+	public int getDislike() {
+		return dislike;
+	}
+	public void setDislike(int dislike) {
+		this.dislike = dislike;
+	}
+	public boolean isSecret() {
+		return secret;
+	}
+	public void setSecret(boolean secret) {
+		this.secret = secret;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 }

@@ -2,6 +2,7 @@
 		 isELIgnored="false"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,13 +51,13 @@
 </tr>
 <c:forEach items="${list}" var="u" varStatus="status">
 	<tr>
-		<td>${totalcnt-status.index}</td>
+		<td>${fn:length(list) - status.index}</td>
 		<td>${u.title}</td>
-		<td>${u.writer}</td>
-		<td>${u.content}</td>
+		<td>${u.userid}</td>
+		<td>${u.contents}</td>
 		<td>${u.regdate}</td>
-		<td><a href="edit/${u.seq}">Edit</a></td>
-		<td><a href="javascript:delete_ok('${u.seq}')">Delete</a></td>
+		<td><a href="edit/${u.id}">Edit</a></td>
+		<td><a href="javascript:delete_ok('${u.id}')">Delete</a></td>
 	</tr>
 </c:forEach>
 </table>
