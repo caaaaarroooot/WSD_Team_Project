@@ -14,6 +14,9 @@ public class BoardService {
         return boardDAO.getBoardList();
     }
 
+    public List<BoardVO> getBoardsBySubject(String subjectName) {
+        return boardDAO.getBoardsBySubject(subjectName);
+    }
 //    public int insertBoard(BoardVO vo) {return boardDAO.insertBoard(vo);}
 //    public int deleteBoard(int id) {
 //        return boardDAO.deleteBoard(id);

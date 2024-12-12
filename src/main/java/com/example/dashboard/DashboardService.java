@@ -12,7 +12,6 @@ public class DashboardService {
 
     public List<DashboardVO> getUserSubjects(String userId) {
         List<DashboardVO> subjects = dashboardDAO.getSubjectsByUserId(userId);
-        System.out.println("Subjects in Service: " + subjects);
         return subjects;
     }
 }

@@ -16,6 +16,11 @@ public class BoardDAO {
         return sqlSession.selectList("Board.getBoardList");
     }
 
+    public List<BoardVO> getBoardsBySubject(String subjectName) {
+        System.out.println(subjectName);
+        return sqlSession.selectList("Board.getBoardsBySubject", subjectName);
+    }
+
 //    public int getTotalcnt() {
 //        return sqlSession.selectOne("Board.getTotalcnt");
 //    }

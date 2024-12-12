@@ -25,18 +25,6 @@ public class DashboardController {
         mv.addObject("subjects", subjects);
         mv.addObject("subjectsSize", subjectsSize);
 
-        // 모델에서 데이터를 확인하는 방법
-        Map<String, Object> model = mv.getModel();  // ModelAndView에서 모델 데이터 가져오기
-        System.out.println("Model contents: " + model);
-
-        // "subjects" 값 출력
-        List<DashboardVO> subjectsFromModel = (List<DashboardVO>) model.get("subjects");
-        System.out.println("Subjects: " + subjectsFromModel);
-
-        // "subjectsSize" 값 출력
-        Integer subjectsSizeFromModel = (Integer) model.get("subjectsSize");
-        System.out.println("Subjects Size: " + subjectsSizeFromModel);
-
         return mv;
     }
 }

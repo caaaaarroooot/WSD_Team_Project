@@ -3,9 +3,9 @@ package com.example.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class BoardController {
@@ -18,12 +18,20 @@ public class BoardController {
         return "index";
     }
 
-    @RequestMapping(value = "/board/list", method = RequestMethod.GET)
-    public String boardList(Model model){
-//        model.addAttribute("totalcnt", boardService.getTotalcnt());
-        model.addAttribute("list", boardService.getBoardList());
-        return "posts";
+    @GetMapping("/board/list")
+    public String list(@RequestParam(value = "subjectName", required = false) String subjectName, Model model) {
+        List<BoardVO> boards;
+        System.out.println(subjectName);
+        if (subjectName != null && !subjectName.isEmpty()) {
+            boards = boardService.getBoardsBySubject(subjectName);  // 필터링된 게시물
+        } else {
+            boards = boardService.getBoardList();  // 전체 게시물
+        }
+        model.addAttribute("list", boards);
+        model.addAttribute("subjectName", subjectName);
+        return "posts";  // JSP 파일 이름
     }
+
 
     @RequestMapping(value = "/board/add", method = RequestMethod.GET)
     public String boardAdd(){

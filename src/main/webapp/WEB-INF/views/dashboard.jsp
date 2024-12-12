@@ -24,7 +24,8 @@
     function openBoard(card) {
       const subjectName = card.getAttribute("data-subject");
       if (subjectName) {
-        window.location.href = './board/list';
+        // subjectName을 쿼리 파라미터로 전달
+        window.location.href = './board/list?subjectName=' + encodeURIComponent(subjectName);
       }
     }
   </script>
