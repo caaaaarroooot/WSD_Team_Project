@@ -9,7 +9,7 @@
 <body>
 
 <script>
-    location.href='./board/list';
+    location.href='./login/login';
 </script>
 
 </body>

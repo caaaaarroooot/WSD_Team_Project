@@ -6,6 +6,11 @@
     <select id="getBoardList" resultType="Board">
         select * from BOARD
     </select>
+    <select id="getBoardsBySubject" parameterType="string" resultType="Board">
+        SELECT *
+        FROM BOARD
+        WHERE subject = #{subjectName}
+    </select>
 <!--    <select id="BOARD_INSERT" resultType="void">-->
 
 <!--    </select>-->
