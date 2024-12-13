@@ -7,8 +7,28 @@
         FROM user_subjects
         WHERE user_id = #{userId};
     </select>
+
     <select id="getAllSubjects" resultType="com.example.dashboard.DashboardVO">
         SELECT subject_name
         FROM user_subjects
     </select>
+
+    <insert id="addSubject" parameterType="map">
+        INSERT INTO user_subjects (user_id, subject_name)
+        VALUES (#{userId}, #{subjectName});
+    </insert>
+
+    <!-- 과목 삭제 -->
+    <delete id="deleteSubject" parameterType="map">
+        DELETE FROM user_subjects
+        WHERE subject_name = #{subject} AND user_id = #{userId}
+    </delete>
+
+    <!-- 과목 수정 -->
+    <update id="editSubject" parameterType="map">
+        UPDATE user_subjects
+        SET subject_name = #{newName}
+        WHERE subject_name = #{subject} AND user_id = #{userId}
+    </update>
+
 </mapper>

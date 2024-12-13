@@ -20,5 +20,15 @@ public class DashboardService {
         return subjects;
     }
 
+    public void addSubject(String userId, String subjectName) {
+        dashboardDAO.addSubject(userId, subjectName);
+    }
 
+    public boolean editSubject(String userId, String subjectName, String newName) {
+        return dashboardDAO.editSubject(userId, subjectName, newName) > 0;
+    }
+
+    public boolean deleteSubject(String userId, String subjectName) {
+        return dashboardDAO.deleteSubject(userId, subjectName) > 0;
+    }
 }
