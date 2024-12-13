@@ -17,6 +17,10 @@ public class BoardService {
     public List<BoardVO> getBoardsBySubject(String subjectName) {
         return boardDAO.getBoardsBySubject(subjectName);
     }
+    public BoardVO getBoardById(int id) {
+        return boardDAO.getBoardById(id);
+    }
+
     public int insertBoard(BoardVO vo) {return boardDAO.insertBoard(vo);}
     public int deleteBoard(int id) {
         return boardDAO.deleteBoard(id);
@@ -25,4 +29,8 @@ public class BoardService {
     public BoardVO getBoard(int seq){return boardDAO.getBoard(seq);}
     public int getTotalcnt() {return boardDAO.getTotalcnt();}
 
+    public int incrementLikes(int id) {
+        boardDAO.updateLikes(id);
+        return boardDAO.getLikes(id);
+    }
     }

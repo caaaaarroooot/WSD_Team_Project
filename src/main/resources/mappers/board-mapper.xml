@@ -13,6 +13,10 @@
         WHERE subject = #{subjectName}
     </select>
 
+    <select id="getBoardById" parameterType="int" resultType="com.example.board.BoardVO">
+        SELECT * FROM BOARD WHERE id = #{id}
+    </select>
+
     <insert id="insertBoard" parameterType="com.example.board.BoardVO">
         INSERT INTO BOARD (title, userid, contents)
         VALUES (#{title}, #{userid}, #{contents})

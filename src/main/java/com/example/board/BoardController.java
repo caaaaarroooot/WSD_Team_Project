@@ -1,11 +1,15 @@
 package com.example.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BoardController {
@@ -47,6 +51,27 @@ public class BoardController {
         } else {
             System.out.println("데이터 추가 성공!");
             return "redirect:/board/list";
+        }
+    }
+
+    @GetMapping("/board/view/{id}")
+    public String view(@PathVariable("id") int id, Model model) {
+        BoardVO board = boardService.getBoardById(id);
+        model.addAttribute("board", board);
+        return "view"; // view.jsp로 이동
+    }
+
+    @PostMapping("/board/like/{id}")
+    public ResponseEntity<Map<String, Object>> likePost(@PathVariable("id") int id) {
+        try {
+            int updatedLikes = boardService.incrementLikes(id);
+            Map<String, Object> response = new HashMap<>();
+            response.put("likes", updatedLikes);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "좋아요 요청 처리 중 오류가 발생했습니다.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 //    @RequestMapping(value = "/board/edit/{id}", method = RequestMethod.GET)

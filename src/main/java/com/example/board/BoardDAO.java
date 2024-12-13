@@ -21,6 +21,10 @@ public class BoardDAO {
         return sqlSession.selectList("Board.getBoardsBySubject", subjectName);
     }
 
+    public BoardVO getBoardById(int id) {
+        return sqlSession.selectOne("Board.getBoardById", id);
+    }
+
     public int getTotalcnt() {
         return sqlSession.selectOne("Board.getTotalcnt");
     }
@@ -40,5 +44,13 @@ public class BoardDAO {
 
     public BoardVO getBoard(int seq) {
         return sqlSession.selectOne("Board.getBoard", seq);
+    }
+
+    public void updateLikes(int id) {
+        sqlSession.update("Board.updateLikes", id);
+    }
+
+    public int getLikes(int id) {
+        return sqlSession.selectOne("Board.getLikes", id);
     }
 }

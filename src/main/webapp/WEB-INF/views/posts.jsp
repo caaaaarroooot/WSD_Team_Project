@@ -109,11 +109,13 @@
 	<div style="width: 100%; height: 90%; display: flex; flex-direction: row; justify-content: center">
 		<h1 style="margin-right: 30px; color: #626466">${fn:length(list) - status.index}</h1>
 		<div style="width: 80%; height: 70px; background-color: white;
-		border: 1px solid #D2D2D2; border-right: none; border-left: none;
-		display: flex; flex-direction: column; justify-content: space-between;
-		box-sizing: border-box; padding: 5px;
-		">
-			<div style="font-size: 25px; font-weight: 900">${u.title}</div>
+        border: 1px solid #D2D2D2; border-right: none; border-left: none;
+        display: flex; flex-direction: column; justify-content: space-between;
+        box-sizing: border-box; padding: 5px;">
+			<!-- 게시글 제목 클릭 시 상세페이지 이동 -->
+			<a href="view/${u.id}" style="text-decoration: none; color: black;">
+				<div style="font-size: 25px; font-weight: 900">${u.title}</div>
+			</a>
 			<div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between; align-items: center">
 				<div>${u.userid}</div>
 				<div style="display: flex; flex-direction: row; justify-content: right; align-items: center">
