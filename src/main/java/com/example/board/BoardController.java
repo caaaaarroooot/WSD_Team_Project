@@ -74,29 +74,43 @@ public class BoardController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
-//    @RequestMapping(value = "/board/edit/{id}", method = RequestMethod.GET)
-//    public String boardEdit(@PathVariable("id") Integer id, Model model){
-//        BoardVO vo = boardService.getBoard(id);
-//        model.addAttribute("boardVO", vo);
-//        return "editform";
-//    }
-//
-//    @RequestMapping(value = "/board/editok", method = RequestMethod.POST)
-//    public String boardEditOk(BoardVO vo){
-//        int i = boardService.updateBoard(vo);
-//        if(i == 0)
-//            System.out.println("데이터 추가 실패!");
-//        else
-//            System.out.println("데이터 추가 성공!");
-//        return "redirect:list";
-//    }
+    @RequestMapping(value = "/board/edit/{id}", method = RequestMethod.GET)
+    public String boardEdit(@PathVariable("id") Integer id, Model model){
+        BoardVO vo = boardService.getBoard(id);
+        model.addAttribute("boardVO", vo);
+        return "editform";
+    }
 
-//    @RequestMapping(value = "/board/delete/{id}", method = RequestMethod.GET)
-//    public String boardDelete(@PathVariable("id") Integer id){
-//        int i = boardService.deleteBoard(id);
-//
-//        return "redirect:../list";
-//    }
+    @RequestMapping(value = "/board/editok", method = RequestMethod.POST)
+    public String boardEditOk(BoardVO vo) {
+        int i = boardService.updateBoard(vo);
+        if (i == 0) {
+            System.out.println("데이터 수정 실패!");
+            return "error";
+        } else {
+            System.out.println("데이터 수정 성공!");
+            return "redirect:/board/view/" + vo.getId(); // 수정된 게시물 상세 페이지로 이동
+        }
+    }
+
+    @RequestMapping(value = "/board/delete/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> boardDelete(@PathVariable("id") Integer id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            int result = boardService.deleteBoard(id);
+            if (result > 0) {
+                response.put("success", true);
+            } else {
+                response.put("success", false);
+                response.put("error", "삭제할 게시물이 없습니다.");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", "삭제 중 오류가 발생했습니다.");
+        }
+        return ResponseEntity.ok(response);
+    }
 
 
 }

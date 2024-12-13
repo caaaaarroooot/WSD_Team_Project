@@ -2,7 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="Board">
+
+    <select id="getBoard" parameterType="int" resultType="com.example.board.BoardVO">
+        SELECT *
+        FROM BOARD
+        WHERE id = #{id}
+    </select>
+
     <select id="getBoardList" resultType="Board">
         SELECT * FROM BOARD
     </select>
@@ -21,4 +29,13 @@
         INSERT INTO BOARD (title, userid, contents)
         VALUES (#{title}, #{userid}, #{contents})
     </insert>
+
+    <update id="updateBoard" parameterType="com.example.board.BoardVO">
+        UPDATE BOARD
+        SET title = #{title},
+        userid = #{userid},
+        contents = #{contents},
+        regdate = NOW()
+        WHERE id = #{id}
+    </update>
 </mapper>

@@ -11,11 +11,11 @@
 <h1>Edit Form</h1>
 <%--@elvariable id="boardVO" type=""--%>
 <form:form modelAttribute="boardVO" action="../editok" method="post">
-    <form:hidden path="seq"/>
+    <form:hidden path="id"/>
     <table>
     <tr><td>Title:</td><td><form:input path="title"/></td></tr>
-    <tr><td>Writer:</td><td><form:input path="writer"/></td></tr>
-    <tr><td>Content:</td><td><form:textarea cols="50" rows="5" path="content"></form:textarea></td></tr>
+    <tr><td>Writer:</td><td><form:input path="userid"/></td></tr>
+    <tr><td>Content:</td><td><form:textarea cols="50" rows="5" path="contents"></form:textarea></td></tr>
     <tr><td colspan="2"><input type="submit" value="Edit Post"/>
     <input type="button" value="Cancel" onclick="history.back()"/></td></tr>
     </table>
