@@ -21,24 +21,24 @@ public class BoardDAO {
         return sqlSession.selectList("Board.getBoardsBySubject", subjectName);
     }
 
-//    public int getTotalcnt() {
-//        return sqlSession.selectOne("Board.getTotalcnt");
-//    }
+    public int getTotalcnt() {
+        return sqlSession.selectOne("Board.getTotalcnt");
+    }
 
-//    // Insert, update, delete 메서드도 MyBatis 방식으로 작성 가능
-//    public int insertBoard(BoardVO vo) {
-//        return sqlSession.insert("Board.insertBoard", vo);
-//    }
-//
-//    public int deleteBoard(int id) {
-//        return sqlSession.delete("Board.deleteBoard", id);
-//    }
-//
-//    public int updateBoard(BoardVO vo) {
-//        return sqlSession.update("Board.updateBoard", vo);
-//    }
-//
-//    public BoardVO getBoard(int seq) {
-//        return sqlSession.selectOne("Board.getBoard", seq);
-//    }
+    // Insert, update, delete 메서드도 MyBatis 방식으로 작성 가능
+    public int insertBoard(BoardVO vo) {
+        return sqlSession.insert("Board.insertBoard", vo);
+    }
+
+    public int deleteBoard(int id) {
+        return sqlSession.delete("Board.deleteBoard", id);
+    }
+
+    public int updateBoard(BoardVO vo) {
+        return sqlSession.update("Board.updateBoard", vo);
+    }
+
+    public BoardVO getBoard(int seq) {
+        return sqlSession.selectOne("Board.getBoard", seq);
+    }
 }

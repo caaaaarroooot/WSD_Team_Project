@@ -33,7 +33,7 @@ public class BoardController {
     }
 
 
-    @RequestMapping(value = "/board/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/board/addpostform", method = RequestMethod.GET)
     public String boardAdd(){
         return "addpostform";
     }
@@ -70,4 +70,13 @@ public class BoardController {
 //
 //        return "redirect:../list";
 //    }
+
+    @RequestMapping(value = "/board/view/{id}", method = RequestMethod.GET)
+    public String boardView(@PathVariable("id") Integer id, Model model) {
+        BoardVO board = boardService.getBoard(id);  // 게시글 조회
+        model.addAttribute("board", board);  // 조회된 게시글 정보를 Model에 추가
+        return "view";  // view.jsp 파일로 이동
+    }
+
+
 }
