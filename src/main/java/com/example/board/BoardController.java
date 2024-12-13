@@ -37,16 +37,18 @@ public class BoardController {
     public String boardAdd(){
         return "addpostform";
     }
-//
-//    @RequestMapping(value = "/board/addok", method = RequestMethod.POST)
-//    public String boardAddOK(BoardVO vo){
-//        int i = boardService.insertBoard(vo);
-//        if(i == 0)
-//            System.out.println("데이터 추가 실패!");
-//        else
-//            System.out.println("데이터 추가 성공!");
-//        return "redirect:list";
-//    }
+
+    @RequestMapping(value = "/board/addok", method = RequestMethod.POST)
+    public String boardAddOK(@ModelAttribute BoardVO vo) {
+        int i = boardService.insertBoard(vo);
+        if (i == 0) {
+            System.out.println("데이터 추가 실패!");
+            return "error";
+        } else {
+            System.out.println("데이터 추가 성공!");
+            return "redirect:/board/list";
+        }
+    }
 //    @RequestMapping(value = "/board/edit/{id}", method = RequestMethod.GET)
 //    public String boardEdit(@PathVariable("id") Integer id, Model model){
 //        BoardVO vo = boardService.getBoard(id);
@@ -70,13 +72,6 @@ public class BoardController {
 //
 //        return "redirect:../list";
 //    }
-
-    @RequestMapping(value = "/board/view/{id}", method = RequestMethod.GET)
-    public String boardView(@PathVariable("id") Integer id, Model model) {
-        BoardVO board = boardService.getBoard(id);  // 게시글 조회
-        model.addAttribute("board", board);  // 조회된 게시글 정보를 Model에 추가
-        return "view";  // view.jsp 파일로 이동
-    }
 
 
 }

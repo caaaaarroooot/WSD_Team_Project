@@ -12,22 +12,22 @@
             event.preventDefault();
 
             const form = document.querySelector('form');
-            const input = document.querySelectorAll('input, select, textarea');
+            const inputs = document.querySelectorAll('input, textarea');
 
             let isValid = true;
-            if (form) {
-                input.forEach(input => {
-                    if (!input.checkValidity()) {
-                        input.reportValidity();
-                        isValid = false;
-                    }
-                });
-            }
+
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    isValid = false;
+                }
+            });
+
             if (isValid) {
                 alert("게시물이 추가됩니다.");
                 form.submit();
             }
-        }
+        };
     </script>
     <style>
         <%--헤더바를 위한 css--%>
@@ -164,12 +164,12 @@
 </div>
 
 
-<form>
+<form method="post" action="<%= request.getContextPath() %>/board/addok">
     <div class="row mb-3">
         <h2>새 글 작성</h2>
         <div class="col-md-6">
             <label for="title">제목</label>
-            <input type="text" class="form-control" id="title" placeholder="제목" required />
+            <input type="text" class="form-control" id="title" name="title" placeholder="제목" required />
             <div class="validate-note">제목이 입력되지 않았습니다.</div>
         </div>
     </div>
@@ -177,14 +177,14 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="userid">작성자</label>
-            <input type="text" class="form-control" id="userid" placeholder="작성자" required />
+            <input type="text" class="form-control" id="userid" name="userid" placeholder="작성자" required />
             <div class="validate-note">작성자 이름을 입력하세요.</div>
         </div>
     </div>
 
     <div class="mb-3">
         <label for="contents">내용</label>
-        <textarea class="form-control" id="contents" placeholder="내용" rows="10" required></textarea>
+        <textarea class="form-control" id="contents" name="contents" placeholder="내용" rows="10" required></textarea>
         <div class="validate-note">내용을 입력하세요.</div>
     </div>
 
