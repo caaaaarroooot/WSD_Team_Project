@@ -49,6 +49,10 @@
                     });
             }
         }
+
+        function goBack() {
+            history.back();
+        }
     </script>
 </head>
 <body>
@@ -66,7 +70,7 @@
         <button class="btn btn-primary" onclick="likePost(${board.id})">
             좋아요 <span class="badge bg-light text-dark" id="likeCount">${board.like}</span>
         </button>
-        <a href="${pageContext.request.contextPath}/board/list" class="btn btn-secondary">목록으로 돌아가기</a>
+        <button class="btn btn-secondary" onclick="goBack()">목록으로 돌아가기</button>
         <a href="${pageContext.request.contextPath}/board/edit/${board.id}" class="btn btn-warning">수정</a>
         <button class="btn btn-danger" onclick="deletePost(${board.id})">삭제</button>
     </div>
