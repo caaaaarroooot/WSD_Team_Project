@@ -10,17 +10,14 @@
     <script>
         function likePost(postId) {
             if (!postId) {
-                console.error("Invalid postId:", postId);
+                console.error("유효하지 않은 게시글 ID:", postId);
                 alert("게시글 ID가 유효하지 않습니다.");
                 return;
             }
 
-            const baseUrl = `${window.location.origin}${pageContext.request.contextPath}`;
-            fetch(`${baseUrl}/board/like/${postId}`, { method: 'POST' })
+            fetch(`/board/like/${postId}`, { method: 'POST' })
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error("좋아요 요청 실패");
-                    }
+                    if (!response.ok) throw new Error("좋아요 요청 실패");
                     return response.json();
                 })
                 .then(data => {
@@ -36,22 +33,20 @@
                 });
         }
 
-        function deletePost(postId) {
-            if (!postId) {
-                console.error("Invalid postId: " + postId);
-                alert("게시글 ID가 유효하지 않습니다.");
-                return;
-            }
+        function deletePost() {
+            console.log("helloworld");
 
-            if (confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
-                const baseUrl = '${pageContext.request.contextPath}';
-                fetch(`${baseUrl}/board/delete/${postId}`, { method: 'GET' })
+            if (confirm("이 게시글을 삭제하시겠습니까?")) {
+                fetch(`${pageContext.request.contextPath}/board/delete/${board.id}`, {
+                    method: 'POST'
+                })
                     .then(response => {
                         if (response.ok) {
                             alert("게시물이 삭제되었습니다.");
-                            window.location.href = `${baseUrl}/board/list`;
+                            // 삭제 후 대시보드 페이지로 이동
+                            window.location.href = '/dashboard';
                         } else {
-                            alert("삭제 요청이 실패했습니다.");
+                            alert("게시물 삭제 실패. 다시 시도하세요.");
                         }
                     })
                     .catch(error => {
@@ -61,9 +56,12 @@
             }
         }
 
+
+
         function goBack() {
-            history.back();
+            window.location.href = "${pageContext.request.contextPath}/board/list?subjectName=${board.subject}";
         }
+
     </script>
 </head>
 <body>
@@ -83,7 +81,7 @@
         </button>
         <button class="btn btn-secondary" onclick="goBack()">목록으로 돌아가기</button>
         <a href="${pageContext.request.contextPath}/board/edit/${board.id}" class="btn btn-warning">수정</a>
-        <button class="btn btn-danger" onclick="deletePost(${board.id})">삭제</button>
+        <button class="btn btn-danger" onclick="deletePost()">삭제</button>
     </div>
 </div>
 </body>

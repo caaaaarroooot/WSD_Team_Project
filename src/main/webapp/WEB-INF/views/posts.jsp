@@ -19,6 +19,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			justify-content: start;
 			margin: 0;
 		}
 		.header {
@@ -83,12 +84,6 @@
 			color: white;
 		}
 	</style>
-	<script>
-		function delete_ok(id){
-			var a = confirm("정말로 삭제하겠습니까?");
-			if(a) location.href='./delete/' + id;
-		}
-	</script>
 </head>
 <body>
 <div class="header">
@@ -97,7 +92,7 @@
 	</div>
 	<!-- Add 버튼 -->
 	<div class="headerBtn">
-		<a href="./addpostform" class="linkImHeader">Add</a>
+		<a href="./addpostform?subjectName=${subjectName}" class="linkImHeader">Add</a>
 	</div>
 	<div class="headerBtn">
 		<a href="${pageContext.request.contextPath}/login/logout" class="linkImHeader">Logout</a>
@@ -113,14 +108,14 @@
 			<option value="regdate" ${sortOption == 'regdate' ? 'selected' : ''}>최신순</option>
 			<option value="likes" ${sortOption == 'likes' ? 'selected' : ''}>좋아요순</option>
 		</select>
-
+		<input type="hidden" name="subjectName" value="${subjectName}" />
 		<button type="submit" style="padding: 5px 10px;">검색</button>
 	</form>
 </div>
 <h1>자유게시판</h1>
 
 	<c:forEach items="${list}" var="u" varStatus="status">
-		<div style="width: 100%; height: 90%; display: flex; flex-direction: row; justify-content: center">
+		<div style="width: 100%; height: 90px; display: flex; flex-direction: row; justify-content: center">
 			<h1 style="margin-right: 30px; color: #626466">${fn:length(list) - status.index}</h1>
 			<div style="width: 80%; height: 70px; background-color: white;
         border: 1px solid #D2D2D2; border-right: none; border-left: none;

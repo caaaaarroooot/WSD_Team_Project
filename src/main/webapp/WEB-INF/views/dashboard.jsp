@@ -83,7 +83,6 @@
 
     function openBoard(subjectName) {
       if (subjectName) {
-        // subjectName을 쿼리 파라미터로 전달
         window.location.href = './board/list?subjectName=' + encodeURIComponent(subjectName);
       }
     }

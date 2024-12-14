@@ -33,8 +33,8 @@ public class BoardService {
         boardDAO.updateLikes(id);
         return boardDAO.getLikes(id);
     }
-    public List<BoardVO> searchBoards(String searchKeyword) {
-        return boardDAO.searchBoards(searchKeyword);
+    public List<BoardVO> searchBoards(String searchKeyword, String subjectName) {
+        return boardDAO.searchBoards(searchKeyword, subjectName);
     }
 
     public void incrementViewCount(int id) {

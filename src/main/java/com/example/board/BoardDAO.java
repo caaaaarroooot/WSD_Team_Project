@@ -4,7 +4,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BoardDAO {
@@ -54,8 +56,11 @@ public class BoardDAO {
         return sqlSession.selectOne("Board.getLikes", id);
     }
 
-    public List<BoardVO> searchBoards(String searchKeyword) {
-        return sqlSession.selectList("Board.searchBoards", searchKeyword);
+    public List<BoardVO> searchBoards(String searchKeyword, String subjectName) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("searchKeyword", searchKeyword);
+        paramMap.put("subjectName", subjectName);
+        return sqlSession.selectList("Board.searchBoards", paramMap);
     }
 
     public void updateViewCount(int id) {

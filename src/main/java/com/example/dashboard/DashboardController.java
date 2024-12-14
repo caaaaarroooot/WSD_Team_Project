@@ -37,8 +37,6 @@ public class DashboardController {
     }
     @PostMapping("/addSubject")
     public String addSubject(@RequestParam("subjectName") String subjectName, HttpSession session) {
-        System.out.println("과목 추가 요청 수신: " + subjectName);
-
         String userId = (String) session.getAttribute("userId");  // 세션에서 userId를 가져옴
 
         if (userId != null && subjectName != null && !subjectName.isEmpty()) {
@@ -52,8 +50,6 @@ public class DashboardController {
     public String editSubject(@RequestParam("oldSubjectName") String oldSubjectName,
                               @RequestParam("newSubjectName") String newSubjectName,
                               HttpSession session) {
-        System.out.println("과목 수정 요청 수신: " + oldSubjectName + " -> " + newSubjectName);
-
         String userId = (String) session.getAttribute("userId");  // 세션에서 userId를 가져옴
 
         if (userId != null && oldSubjectName != null && newSubjectName != null && !newSubjectName.isEmpty()) {

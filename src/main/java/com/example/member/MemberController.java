@@ -25,11 +25,6 @@ public class MemberController {
     @RequestMapping(value="/loginOk",method=RequestMethod.POST)
     public String loginCheck(HttpSession session, MemberVO vo){
         String returnURL = "";
-
-        // 로그인 전에 넘어오는 값 확인
-        System.out.println("Received UserId: " + vo.getUserId());
-        System.out.println("Received Password: " + vo.getPassword());
-
         if (session.getAttribute("login") != null ){
             session.removeAttribute("login");
         }

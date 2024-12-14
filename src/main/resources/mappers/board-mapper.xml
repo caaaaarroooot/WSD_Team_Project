@@ -26,8 +26,8 @@
     </select>
 
     <insert id="insertBoard" parameterType="com.example.board.BoardVO">
-        INSERT INTO BOARD (title, userid, contents)
-        VALUES (#{title}, #{userid}, #{contents})
+        INSERT INTO BOARD (userid, title, professor, contents, subject)
+        VALUES (#{userid}, #{title}, #{professor}, #{contents}, #{subject})
     </insert>
 
     <update id="updateBoard" parameterType="com.example.board.BoardVO">
@@ -63,8 +63,8 @@
     <select id="searchBoards" parameterType="string" resultType="com.example.board.BoardVO">
         SELECT *
         FROM BOARD
-        WHERE title LIKE CONCAT('%', #{searchKeyword}, '%')
-        OR contents LIKE CONCAT('%', #{searchKeyword}, '%');
+        WHERE subject = #{subjectName}
+        AND title LIKE CONCAT('%', #{searchKeyword}, '%');
     </select>
 
 </mapper>
