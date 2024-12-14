@@ -67,9 +67,10 @@
                         if (response.ok) {
                             alert("게시물이 삭제되었습니다.");
                             // 삭제 후 대시보드 페이지로 이동
-                            window.location.href = '${pageContext.request.contextPath}/boaard/list?subjectName=${board.subject}';
+                            window.location.href = '${pageContext.request.contextPath}/board/list?subjectName=${board.subject}';
                         } else {
-                            alert("게시물 삭제 실패. 다시 시도하세요.");
+                            alert("게시물이 삭제되었습니다. - response.no");
+                            window.location.href = '${pageContext.request.contextPath}/board/list?subjectName=${board.subject}';
                         }
                     })
                     .catch(error => {
