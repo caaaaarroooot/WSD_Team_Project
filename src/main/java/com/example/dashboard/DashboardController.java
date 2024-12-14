@@ -24,11 +24,8 @@ public class DashboardController {
 
         // userId가 'admin'일 경우 모든 과목을 가져옴
         List<DashboardVO> subjects;
-        if ("admin".equals(userId)) {
-            subjects = dashboardService.getAllSubjects();  // 모든 과목을 가져옴
-        } else {
-            subjects = dashboardService.getUserSubjects(userId);  // 사용자별 과목을 가져옴
-        }
+        subjects = dashboardService.getUserSubjects(userId);  // 사용자별 과목을 가져옴
+
 
         int subjectsSize = (subjects != null) ? subjects.size() : 0;
 

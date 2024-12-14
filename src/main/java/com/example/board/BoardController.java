@@ -26,15 +26,24 @@ public class BoardController {
     @GetMapping("/board/list")
     public String list(@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
                        @RequestParam(value = "sortOption", required = false) String sortOption,
+                       @RequestParam(value = "subjectName", required = false) String subjectName, // 추가된 파라미터
                        Model model) {
         List<BoardVO> boards;
-
-        if (searchKeyword != null && !searchKeyword.isEmpty()) {
+        System.out.println(subjectName);
+        // 과목 이름으로 필터링하는 경우
+        if (subjectName != null && !subjectName.isEmpty()) {
+            boards = boardService.getBoardsBySubject(subjectName);
+        }
+        // 검색어로 필터링하는 경우
+        else if (searchKeyword != null && !searchKeyword.isEmpty()) {
             boards = boardService.searchBoards(searchKeyword);
-        } else {
+        }
+        // 기본 리스트
+        else {
             boards = boardService.getBoardList();
         }
 
+        // 정렬 옵션 처리
         if ("title".equals(sortOption)) {
             boards.sort(Comparator.comparing(BoardVO::getTitle));
         } else if ("regdate".equals(sortOption)) {
@@ -43,12 +52,15 @@ public class BoardController {
             boards.sort(Comparator.comparing(BoardVO::getLike).reversed());
         }
 
+        // 모델에 데이터 추가
         model.addAttribute("list", boards);
         model.addAttribute("searchKeyword", searchKeyword);
         model.addAttribute("sortOption", sortOption);
+        model.addAttribute("subjectName", subjectName);
 
-        return "posts";
+        return "posts"; // 반환할 뷰 이름
     }
+
 
 
     @RequestMapping(value = "/board/addpostform", method = RequestMethod.GET)

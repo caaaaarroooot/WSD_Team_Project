@@ -119,29 +119,29 @@
 </div>
 <h1>자유게시판</h1>
 
-<c:forEach items="${list}" var="u" varStatus="status">
-	<div style="width: 100%; height: 90%; display: flex; flex-direction: row; justify-content: center">
-		<h1 style="margin-right: 30px; color: #626466">${fn:length(list) - status.index}</h1>
-		<div style="width: 80%; height: 70px; background-color: white;
+	<c:forEach items="${list}" var="u" varStatus="status">
+		<div style="width: 100%; height: 90%; display: flex; flex-direction: row; justify-content: center">
+			<h1 style="margin-right: 30px; color: #626466">${fn:length(list) - status.index}</h1>
+			<div style="width: 80%; height: 70px; background-color: white;
         border: 1px solid #D2D2D2; border-right: none; border-left: none;
         display: flex; flex-direction: column; justify-content: space-between;
         box-sizing: border-box; padding: 5px;">
-			<!-- 게시글 제목 클릭 시 상세페이지 이동 -->
-			<a href="view/${u.id}" style="text-decoration: none; color: black;">
-				<div style="font-size: 25px; font-weight: 900">${u.title}</div>
-			</a>
-			<div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between; align-items: center">
-				<div>${u.userid}</div>
-				<div style="display: flex; flex-direction: row; justify-content: right; align-items: center">
-						${u.regdate}
-					<img src="../img/view.png" width="30px" style="margin: 0 5px"/>
-						${u.view}
-					<img src="../img/like.png" width="25px" style="margin: 0 5px"/>
-						${u.like}
+				<!-- 게시글 제목 클릭 시 상세페이지 이동 -->
+				<a href="view/${u.id}" style="text-decoration: none; color: black;">
+					<div style="font-size: 25px; font-weight: 900">${u.title}</div>
+				</a>
+				<div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between; align-items: center; margin-top: 5px; margin-bottom: 5px;">
+					<div>${u.userid}</div>
+					<div style="display: flex; flex-direction: row; justify-content: flex-end; align-items: center;">
+							${u.regdate}
+						<img src="../img/view.png" width="30px" style="margin: 0 5px;"/>
+							${u.view}
+						<img src="../img/like.png" width="25px" style="margin: 0 5px;"/>
+							${u.like}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</c:forEach>
+	</c:forEach>
 </body>
 </html>
