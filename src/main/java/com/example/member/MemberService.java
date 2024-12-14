@@ -12,7 +12,6 @@ public class MemberService {
     MemberDAO memberDAO;
 
     public MemberVO getMember(MemberVO memberVO) {
-        System.out.println("Checking database for UserId: " + memberVO.getUserId());
         return memberDAO.getMember(memberVO);
     }
 }

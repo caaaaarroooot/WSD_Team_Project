@@ -84,4 +84,21 @@ public class BoardVO {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardVO{" +
+				"id=" + id +
+				", userid='" + userid + '\'' +
+				", title='" + title + '\'' +
+				", professor='" + professor + '\'' +
+				", contents='" + contents + '\'' +
+				", regdate=" + regdate +
+				", view=" + view +
+				", like=" + like +
+				", dislike=" + dislike +
+				", secret=" + secret +
+				", subject='" + subject + '\'' +
+				'}';
+	}
 }

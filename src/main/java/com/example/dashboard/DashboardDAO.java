@@ -27,7 +27,6 @@ public class DashboardDAO {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userId", userId);
         paramMap.put("subjectName", subject);
-        System.out.println(userId + " " + subject);
         sqlSession.insert("Dashboard.addSubject", paramMap);
     }
     // 과목 수정

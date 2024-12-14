@@ -9,7 +9,6 @@ public class MemberDAO {
     @Autowired
     SqlSessionTemplate sqlSession;
     public MemberVO getMember(MemberVO member) {
-        System.out.println("Executing query with UserId: " + member.getUserId());
         return sqlSession.selectOne("Member.getMember", member);
     }
 }
