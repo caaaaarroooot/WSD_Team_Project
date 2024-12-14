@@ -36,4 +36,8 @@ public class BoardService {
     public List<BoardVO> searchBoards(String searchKeyword) {
         return boardDAO.searchBoards(searchKeyword);
     }
+
+    public void incrementViewCount(int id) {
+        boardDAO.updateViewCount(id);
+    }
     }

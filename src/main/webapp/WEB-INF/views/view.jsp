@@ -9,9 +9,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
         function likePost(postId) {
-            const baseUrl = '${pageContext.request.contextPath}';
-            fetch(`${baseUrl}/board/like/${postId}`, { method: 'POST' })
-                .then(response => response.json())
+            if (!postId) {
+                console.error("Invalid postId: " + postId);
+                alert("게시글 ID가 유효하지 않습니다.");
+                return;
+            }
+
+            const baseUrl = '${pageContext.request.contextPath}'; // JSP에서 Context Path 가져오기
+            const likeUrl = `${baseUrl}/board/like/${postId}`; // postId 포함
+
+            fetch(likeUrl, { method: 'POST' })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('좋아요 요청 실패');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.success) {
                         document.getElementById('likeCount').innerText = data.likes;

@@ -82,24 +82,29 @@ public class BoardController {
 
     @GetMapping("/board/view/{id}")
     public String view(@PathVariable("id") int id, Model model) {
+        boardService.incrementViewCount(id);
+
         BoardVO board = boardService.getBoardById(id);
         model.addAttribute("board", board);
-        return "view"; // view.jsp로 이동
+
+        return "view";
     }
 
     @PostMapping("/board/like/{id}")
     public ResponseEntity<Map<String, Object>> likePost(@PathVariable("id") int id) {
+        Map<String, Object> response = new HashMap<>();
         try {
             int updatedLikes = boardService.incrementLikes(id);
-            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
             response.put("likes", updatedLikes);
-            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("error", "좋아요 요청 처리 중 오류가 발생했습니다.");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+            response.put("success", false);
+            response.put("error", "좋아요 요청 처리 중 오류가 발생했습니다.");
+            e.printStackTrace();
         }
+        return ResponseEntity.ok(response);
     }
+
     @RequestMapping(value = "/board/edit/{id}", method = RequestMethod.GET)
     public String boardEdit(@PathVariable("id") Integer id, Model model){
         BoardVO vo = boardService.getBoard(id);

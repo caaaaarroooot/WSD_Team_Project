@@ -57,4 +57,8 @@ public class BoardDAO {
     public List<BoardVO> searchBoards(String searchKeyword) {
         return sqlSession.selectList("Board.searchBoards", searchKeyword);
     }
+
+    public void updateViewCount(int id) {
+        sqlSession.update("Board.updateViewCount", id);
+    }
 }

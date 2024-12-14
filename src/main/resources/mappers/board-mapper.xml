@@ -39,6 +39,22 @@
         WHERE id = #{id}
     </update>
 
+    <update id="updateLikes">
+        UPDATE BOARD
+        SET likes = likes + 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateViewCount">
+        UPDATE BOARD
+        SET view = view + 1
+        WHERE id = #{id}
+    </update>
+
+    <select id="getLikes" resultType="int">
+        SELECT likes FROM BOARD WHERE id = #{id}
+    </select>
+
     <delete id="deleteBoard" parameterType="int">
         DELETE FROM BOARD
         WHERE id = #{id}
@@ -50,4 +66,5 @@
         WHERE title LIKE CONCAT('%', #{searchKeyword}, '%')
         OR contents LIKE CONCAT('%', #{searchKeyword}, '%');
     </select>
+
 </mapper>
