@@ -142,6 +142,7 @@ public class BoardController {
     public String deletePost(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         System.out.println("게시글 삭제 요청 수신: " + id);
         boardService.deleteBoard(id);
+        System.out.println("board/delete: " + id);
         return "redirect:/board/list";  // 게시물 삭제 후 목록으로 리디렉션
     }
 }
