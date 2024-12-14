@@ -134,7 +134,7 @@
 <body>
 <div class="header">
     <div style="width: 1200px">
-        <a href="../dashboard" style="text-decoration: none"><h1 style="color: white">GGulTip</h1></a>
+        <a href="../../dashboard" style="text-decoration: none"><h1 style="color: white">GGulTip</h1></a>
     </div>
     <div class="headerBtn linkImHeader" onclick="openModal()">Add</div>
     <div class="headerBtn">

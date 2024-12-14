@@ -83,6 +83,25 @@
     </style>
 
     <script>
+        // 페이지 로드 시 sessionScope.loggedInUser와 board.userid 콘솔 출력
+        window.onload = function() {
+            // JSP 변수 값 JavaScript 변수로 할당
+            var loggedInUser = "${sessionScope.userId}";
+            var boardUserId = "${board.userid}";
+
+            // 콘솔에 출력
+            console.log("Logged In User (session): ", loggedInUser);
+            console.log("Board User ID (board.userid): ", boardUserId);
+
+            // 이제 JavaScript에서 비교할 수 있음
+            if (loggedInUser === boardUserId) {
+                console.log("로그인된 사용자와 게시물 작성자가 일치합니다.");
+            } else {
+                console.log("로그인된 사용자와 게시물 작성자가 일치하지 않습니다.");
+                document.getElementById("buttonDiv").style.display = "none";
+            }
+        }
+
         // 게시글 삭제 기능
         function deletePost() {
             console.log("helloworld");
@@ -119,7 +138,7 @@
 <body>
 <div class="header">
     <div style="width: 1200px">
-        <a href="./dashboard" style="text-decoration: none"><h1 style="color: white">GGulTip</h1></a>
+        <a href="../../dashboard" style="text-decoration: none"><h1 style="color: white">GGulTip</h1></a>
     </div>
     <div class="headerBtn linkImHeader" onclick="openModal()">Add</div>
     <div class="headerBtn">
@@ -131,17 +150,14 @@
     <!-- 상단 버튼 섹션 -->
     <div class="top-buttons d-flex justify-content-between align-items-center">
         <a href="${pageContext.request.contextPath}/board/list?subjectName=${board.subject}" class="btn btn-secondary">목록으로 이동</a>
-        <div>
-            <!-- 수정 및 삭제 버튼: 로그인 유저와 게시글 작성자가 동일할 경우에만 표시 -->
-            <c:if test="${sessionScope.userId eq board.userid}">
+            <div id="buttonDiv">
                 <a href="${pageContext.request.contextPath}/board/edit/${board.id}" class="btn btn-warning">
                     <i class="bi bi-pencil-square"></i> 수정
                 </a>
                 <button class="btn btn-danger" onclick="deletePost(${board.id})">
                     <i class="bi bi-trash"></i> 삭제
                 </button>
-            </c:if>
-        </div>
+            </div>
     </div>
 
     <!-- 게시글 상세 -->
