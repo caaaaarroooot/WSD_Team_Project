@@ -8,6 +8,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <style>
+        <%--헤더바를 위한 css--%>
+        body {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 30px;
+            padding-top: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            position: fixed; /* 화면 상단에 고정 */
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background-color: rgb(48, 23, 5);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
+            opacity: 0.8;
+        }
+        .headerBtn {
+            height: 100%;
+            width: 100px;
+            font-size: 25px;
+            box-sizing: border-box;
+            margin: 10px 5px 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .headerDrop {
+            color: white !important;
+            font-size: 25px !important;
+        }
+        .linkImHeader {
+            text-decoration: none;
+            color: white;
+        }
+
+        .linkImHeader:hover {
+            text-decoration: none !important;
+            color: white;
+            cursor: pointer;
+        }
+        /*여기까지 - for header*/
         .top-buttons {
             background-color: #f8f9fa;
             padding: 10px 20px;
@@ -68,6 +117,16 @@
     </script>
 </head>
 <body>
+<div class="header">
+    <div style="width: 1200px">
+        <a href="./dashboard" style="text-decoration: none"><h1 style="color: white">GGulTip</h1></a>
+    </div>
+    <div class="headerBtn linkImHeader" onclick="openModal()">Add</div>
+    <div class="headerBtn">
+        <a href="${pageContext.request.contextPath}/login/logout" class="linkImHeader">Logout</a>
+    </div>
+</div>
+
 <div class="container mt-4">
     <!-- 상단 버튼 섹션 -->
     <div class="top-buttons d-flex justify-content-between align-items-center">
