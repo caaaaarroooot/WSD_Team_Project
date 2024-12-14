@@ -33,4 +33,7 @@ public class BoardService {
         boardDAO.updateLikes(id);
         return boardDAO.getLikes(id);
     }
+    public List<BoardVO> searchBoards(String searchKeyword) {
+        return boardDAO.searchBoards(searchKeyword);
+    }
     }

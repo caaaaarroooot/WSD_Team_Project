@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,17 +24,30 @@ public class BoardController {
     }
 
     @GetMapping("/board/list")
-    public String list(@RequestParam(value = "subjectName", required = false) String subjectName, Model model) {
+    public String list(@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+                       @RequestParam(value = "sortOption", required = false) String sortOption,
+                       Model model) {
         List<BoardVO> boards;
-        System.out.println(subjectName);
-        if (subjectName != null && !subjectName.isEmpty() ) {
-            boards = boardService.getBoardsBySubject(subjectName);  // 필터링된 게시물
+
+        if (searchKeyword != null && !searchKeyword.isEmpty()) {
+            boards = boardService.searchBoards(searchKeyword);
         } else {
-            boards = boardService.getBoardList();  // 전체 게시물
+            boards = boardService.getBoardList();
         }
+
+        if ("title".equals(sortOption)) {
+            boards.sort(Comparator.comparing(BoardVO::getTitle));
+        } else if ("regdate".equals(sortOption)) {
+            boards.sort(Comparator.comparing(BoardVO::getRegdate).reversed());
+        } else if ("likes".equals(sortOption)) {
+            boards.sort(Comparator.comparing(BoardVO::getLike).reversed());
+        }
+
         model.addAttribute("list", boards);
-        model.addAttribute("subjectName", subjectName);
-        return "posts";  // JSP 파일 이름
+        model.addAttribute("searchKeyword", searchKeyword);
+        model.addAttribute("sortOption", sortOption);
+
+        return "posts";
     }
 
 
@@ -93,9 +107,8 @@ public class BoardController {
         }
     }
 
-    @RequestMapping(value = "/board/delete/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> boardDelete(@PathVariable("id") Integer id) {
+    @GetMapping("/board/delete/{id}")
+    public ResponseEntity<Map<String, Object>> deletePost(@PathVariable("id") int id) {
         Map<String, Object> response = new HashMap<>();
         try {
             int result = boardService.deleteBoard(id);
@@ -103,14 +116,13 @@ public class BoardController {
                 response.put("success", true);
             } else {
                 response.put("success", false);
-                response.put("error", "삭제할 게시물이 없습니다.");
+                response.put("message", "게시물이 존재하지 않습니다.");
             }
         } catch (Exception e) {
             response.put("success", false);
-            response.put("error", "삭제 중 오류가 발생했습니다.");
+            response.put("message", "서버 오류가 발생했습니다.");
+            e.printStackTrace();
         }
         return ResponseEntity.ok(response);
     }
-
-
 }

@@ -103,6 +103,20 @@
 		<a href="${pageContext.request.contextPath}/login/logout" class="linkImHeader">Logout</a>
 	</div>
 </div>
+<div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+	<form method="get" action="${pageContext.request.contextPath}/board/list" style="display: flex;">
+		<input type="text" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword}" style="margin-right: 10px; padding: 5px;" />
+
+		<select name="sortOption" style="margin-right: 10px; padding: 5px;">
+			<option value="" ${sortOption == null ? 'selected' : ''}>정렬 없음</option>
+			<option value="title" ${sortOption == 'title' ? 'selected' : ''}>제목순</option>
+			<option value="regdate" ${sortOption == 'regdate' ? 'selected' : ''}>최신순</option>
+			<option value="likes" ${sortOption == 'likes' ? 'selected' : ''}>좋아요순</option>
+		</select>
+
+		<button type="submit" style="padding: 5px 10px;">검색</button>
+	</form>
+</div>
 <h1>자유게시판</h1>
 
 <c:forEach items="${list}" var="u" varStatus="status">

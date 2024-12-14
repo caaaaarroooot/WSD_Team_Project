@@ -26,25 +26,25 @@
         }
 
         function deletePost(postId) {
+            if (!postId) {
+                console.error("Invalid postId: " + postId);
+                alert("게시글 ID가 유효하지 않습니다.");
+                return;
+            }
+
             if (confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
                 const baseUrl = '${pageContext.request.contextPath}';
-                fetch(`${baseUrl}/board/delete/${postId}`, { method: 'POST' })
+                fetch(`${baseUrl}/board/delete/${postId}`, { method: 'GET' })
                     .then(response => {
-                        if (!response.ok) {
-                            throw new Error('삭제 요청이 실패했습니다.');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.success) {
+                        if (response.ok) {
                             alert("게시물이 삭제되었습니다.");
-                            window.location.href = "/board/list"; // 목록 페이지로 이동
+                            window.location.href = `${baseUrl}/board/list`;
                         } else {
-                            alert("삭제 실패: " + data.error);
+                            alert("삭제 요청이 실패했습니다.");
                         }
                     })
                     .catch(error => {
-                        alert("서버 오류가 발생했습니다.");
+                        alert("서버와의 통신 중 문제가 발생했습니다.");
                         console.error("Error:", error);
                     });
             }
@@ -66,7 +66,7 @@
         <button class="btn btn-primary" onclick="likePost(${board.id})">
             좋아요 <span class="badge bg-light text-dark" id="likeCount">${board.like}</span>
         </button>
-        <a href="/board/list" class="btn btn-secondary">목록으로 돌아가기</a>
+        <a href="${pageContext.request.contextPath}/board/list" class="btn btn-secondary">목록으로 돌아가기</a>
         <a href="${pageContext.request.contextPath}/board/edit/${board.id}" class="btn btn-warning">수정</a>
         <button class="btn btn-danger" onclick="deletePost(${board.id})">삭제</button>
     </div>

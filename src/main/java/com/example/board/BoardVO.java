@@ -1,6 +1,7 @@
 package com.example.board;
 
 import java.util.Date;
+import java.util.List;
 
 public class BoardVO {
 	private int id;            // 기존 seq -> id로 변경

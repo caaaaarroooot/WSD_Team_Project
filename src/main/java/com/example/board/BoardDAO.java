@@ -53,4 +53,8 @@ public class BoardDAO {
     public int getLikes(int id) {
         return sqlSession.selectOne("Board.getLikes", id);
     }
+
+    public List<BoardVO> searchBoards(String searchKeyword) {
+        return sqlSession.selectList("Board.searchBoards", searchKeyword);
+    }
 }

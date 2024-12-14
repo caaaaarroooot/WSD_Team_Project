@@ -38,4 +38,16 @@
         regdate = NOW()
         WHERE id = #{id}
     </update>
+
+    <delete id="deleteBoard" parameterType="int">
+        DELETE FROM BOARD
+        WHERE id = #{id}
+    </delete>
+
+    <select id="searchBoards" parameterType="string" resultType="com.example.board.BoardVO">
+        SELECT *
+        FROM BOARD
+        WHERE title LIKE CONCAT('%', #{searchKeyword}, '%')
+        OR contents LIKE CONCAT('%', #{searchKeyword}, '%');
+    </select>
 </mapper>
