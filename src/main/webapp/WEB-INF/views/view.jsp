@@ -7,54 +7,33 @@
     <title>게시글 상세</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
     <style>
-        body {
+        .top-buttons {
             background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
         }
-        .container {
-            max-width: 800px;
-            margin-top: 50px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+        .post-title {
+            font-size: 1.8rem;
+            font-weight: bold;
         }
-        .btn-group {
+        .post-meta {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .post-content {
             margin-top: 20px;
+            font-size: 1.1rem;
         }
-        .badge {
-            font-size: 1rem;
+        .post-footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            text-align: right;
+            color: #6c757d;
         }
     </style>
 
     <script>
-        // 게시글 좋아요 기
-        function likePost(postId) {
-            if (!postId) {
-                console.error("유효하지 않은 게시글 ID:", postId);
-                alert("게시글 ID가 유효하지 않습니다.");
-                return;
-            }
-
-            fetch(`/board/like/${postId}`, { method: 'POST' })
-                .then(response => {
-                    if (!response.ok) throw new Error("좋아요 요청 실패");
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('likeCount').innerText = data.likes;
-                    } else {
-                        alert("좋아요 요청 실패: " + data.error);
-                    }
-                })
-                .catch(error => {
-                    alert("서버와의 통신 중 문제가 발생했습니다.");
-                    console.error("Error:", error);
-                });
-        }
-
         // 게시글 삭제 기능
         function deletePost() {
             console.log("helloworld");
@@ -88,36 +67,33 @@
     </script>
 </head>
 <body>
-<div class="container">
-    <!-- 제목 -->
-    <div class="mb-4 text-center">
-        <h1>${board.title}</h1>
-        <p class="text-muted">작성자: ${board.userid} | 작성일: ${board.regdate}</p>
-    </div>
-
-    <!-- 내용 -->
-    <div class="mb-4">
-        <div class="card">
-            <div class="card-body">
-                <p class="card-text">${board.contents}</p>
-            </div>
+<div class="container mt-4">
+    <!-- 상단 버튼 섹션 -->
+    <div class="top-buttons d-flex justify-content-between align-items-center">
+        <a href="${pageContext.request.contextPath}/board/list" class="btn btn-secondary">목록으로 이동</a>
+        <div>
+            <!-- 수정 및 삭제 버튼: 로그인 유저와 게시글 작성자가 동일할 경우에만 표시 -->
+            <c:if test="${sessionScope.userId eq board.userid}">
+                <a href="${pageContext.request.contextPath}/board/edit/${board.id}" class="btn btn-warning">
+                    <i class="bi bi-pencil-square"></i> 수정
+                </a>
+                <button class="btn btn-danger" onclick="deletePost(${board.id})">
+                    <i class="bi bi-trash"></i> 삭제
+                </button>
+            </c:if>
         </div>
     </div>
 
-    <!-- 수정 및 삭제 -->
-    <div class="d-flex justify-content-between align-items-center">
-        <button class="btn btn-primary" onclick="likePost(${board.id})">
-            좋아요 <span class="badge bg-light text-dark" id="likeCount">${board.like}</span>
-        </button>
-        <button class="btn btn-secondary" onclick="goBack()">목록으로 돌아가기</button>
+    <!-- 게시글 상세 -->
+    <div class="mt-4">
+        <h1 class="post-title">${board.title}</h1>
+        <p class="post-meta">작성자: ${board.userid} | 작성일: ${board.regdate}</p>
+        <p class="post-content">${board.contents}</p>
+    </div>
 
-        <!-- 해당 게시글 작성자에게만 표시 -->
-        <c:if test="${sessionScope.loggedInUser eq board.userid}">
-            <div class="btn-group">
-                <a href="${pageContext.request.contextPath}/board/edit/${board.id}" class="btn btn-warning">수정</a>
-                <button class="btn btn-danger" onclick="deletePost(${board.id})">삭제</button>
-            </div>
-        </c:if>
+    <!-- 조회수 -->
+    <div class="post-footer">
+        조회수: ${board.view}
     </div>
 </div>
 </body>
