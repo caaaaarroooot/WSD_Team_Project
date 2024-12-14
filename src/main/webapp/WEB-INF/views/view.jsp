@@ -95,9 +95,10 @@
                         if (response.ok) {
                             alert("게시물이 삭제되었습니다.");
                             // 삭제 후 대시보드 페이지로 이동
-                            window.location.href = '${pageContext.request.contextPath}/boaard/list?subjectName=${board.subject}';
+                            window.location.href = '${pageContext.request.contextPath}/board/list?subjectName=${board.subject}';
                         } else {
-                            alert("게시물 삭제 실패. 다시 시도하세요.");
+                            alert("게시물이 삭제되었습니다. - response.no");
+                            window.location.href = '${pageContext.request.contextPath}/board/list?subjectName=${board.subject}';
                         }
                     })
                     .catch(error => {
@@ -129,7 +130,7 @@
 <div class="container mt-4">
     <!-- 상단 버튼 섹션 -->
     <div class="top-buttons d-flex justify-content-between align-items-center">
-        <a href="${pageContext.request.contextPath}/board/list" class="btn btn-secondary">목록으로 이동</a>
+        <a href="${pageContext.request.contextPath}/board/list?subjectName=${board.subject}" class="btn btn-secondary">목록으로 이동</a>
         <div>
             <!-- 수정 및 삭제 버튼: 로그인 유저와 게시글 작성자가 동일할 경우에만 표시 -->
             <c:if test="${sessionScope.userId eq board.userid}">
