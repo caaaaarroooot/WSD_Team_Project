@@ -10,18 +10,16 @@
     <script>
         function likePost(postId) {
             if (!postId) {
-                console.error("Invalid postId: " + postId);
+                console.error("Invalid postId:", postId);
                 alert("게시글 ID가 유효하지 않습니다.");
                 return;
             }
 
-            const baseUrl = '${pageContext.request.contextPath}'; // JSP에서 Context Path 가져오기
-            const likeUrl = `${baseUrl}/board/like/${postId}`; // postId 포함
-
-            fetch(likeUrl, { method: 'POST' })
+            const baseUrl = `${window.location.origin}${pageContext.request.contextPath}`;
+            fetch(`${baseUrl}/board/like/${postId}`, { method: 'POST' })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('좋아요 요청 실패');
+                        throw new Error("좋아요 요청 실패");
                     }
                     return response.json();
                 })
@@ -29,12 +27,12 @@
                     if (data.success) {
                         document.getElementById('likeCount').innerText = data.likes;
                     } else {
-                        alert(data.error || '좋아요 요청이 실패했습니다.');
+                        alert("좋아요 요청 실패: " + data.error);
                     }
                 })
                 .catch(error => {
-                    alert('서버와의 통신 중 문제가 발생했습니다.');
-                    console.error('Error:', error);
+                    alert("서버와의 통신 중 문제가 발생했습니다.");
+                    console.error("Error:", error);
                 });
         }
 

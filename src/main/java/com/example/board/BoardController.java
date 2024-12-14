@@ -92,17 +92,18 @@ public class BoardController {
 
     @PostMapping("/board/like/{id}")
     public ResponseEntity<Map<String, Object>> likePost(@PathVariable("id") int id) {
-        Map<String, Object> response = new HashMap<>();
         try {
             int updatedLikes = boardService.incrementLikes(id);
+            Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("likes", updatedLikes);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.put("success", false);
-            response.put("error", "좋아요 요청 처리 중 오류가 발생했습니다.");
-            e.printStackTrace();
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("error", "좋아요 요청 처리 중 오류가 발생했습니다.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
-        return ResponseEntity.ok(response);
     }
 
     @RequestMapping(value = "/board/edit/{id}", method = RequestMethod.GET)
