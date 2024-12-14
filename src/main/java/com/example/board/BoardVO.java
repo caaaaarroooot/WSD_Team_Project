@@ -15,6 +15,8 @@ public class BoardVO {
 	private int dislike;       // 추가된 dislike 필드
 	private boolean secret;    // 추가된 secret 필드
 	private String subject;
+	private String fileName;
+	private String filePath;
 
 
 	// Getter and Setter methods
@@ -84,6 +86,10 @@ public class BoardVO {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+	public String getFileName() { return fileName; }
+	public void setFileName(String fileName) { this.fileName = fileName; }
+	public String getFilePath() { return filePath; }
+	public void setFilePath(String filePath) { this.filePath = filePath; }
 
 	@Override
 	public String toString() {

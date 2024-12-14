@@ -167,6 +167,17 @@
         <p class="post-content">${board.contents}</p>
     </div>
 
+    <!-- 첨부파일 -->
+    <div class="post-content">
+        <p>${board.contents}</p>
+    </div>
+
+    <c:if test="${board.fileName != null}">
+        <div class="post-file mt-3">
+            <a href="/uploads/${board.fileName}" download>${board.fileName}</a>
+        </div>
+    </c:if>
+
     <!-- 조회수 -->
     <div class="post-footer">
         조회수: ${board.view}

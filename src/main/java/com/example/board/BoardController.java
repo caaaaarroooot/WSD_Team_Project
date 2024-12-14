@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -66,32 +68,45 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/board/addok", method = RequestMethod.POST)
-    public String boardAddOK(@ModelAttribute BoardVO vo, HttpSession session) {
-        // 세션에서 현재 로그인된 사용자의 userid 값을 가져옴
+    public String boardAddOK(@ModelAttribute BoardVO vo,
+                             @RequestParam(value = "uploadFile", required = false) MultipartFile file,
+                             HttpSession session) {
         String userid = (String) session.getAttribute("userId");
 
-        if (userid != null) {
-            // BoardVO 객체에 userid 값 설정
-            vo.setUserid(userid);
-        } else {
-            // userid가 없으면 (로그인되지 않은 상태일 경우)
+        if (userid == null) {
             System.out.println("로그인되지 않은 사용자");
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+            return "redirect:/login";
         }
 
-        // 데이터 추가
-        int i = boardService.insertBoard(vo);
-        if (i == 0) {
-            System.out.println("데이터 추가 실패!");
+        vo.setUserid(userid);
+
+        try {
+            if (file != null && !file.isEmpty()) {
+                String uploadDir = "C:/uploads/";
+                String filePath = uploadDir + file.getOriginalFilename();
+
+                File directory = new File(uploadDir);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                file.transferTo(new File(filePath));
+
+                vo.setFileName(file.getOriginalFilename());
+                vo.setFilePath(filePath);
+            }
+
+            int result = boardService.insertBoard(vo);
+            if (result > 0) {
+                return "redirect:/board/list?subjectName=" + vo.getSubject();
+            } else {
+                return "error";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return "error";
-        } else {
-            System.out.println("데이터 추가 성공!");
-            System.out.println("VO: " + vo.toString());
-            return "redirect:/board/list?subjectName=" + vo.getSubject();
         }
     }
-
-
 
     @GetMapping("/board/view/{id}")
     public String view(@PathVariable("id") int id, Model model) {

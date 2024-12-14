@@ -162,7 +162,7 @@
     </div>
 </div>
 
-<form method="post" action="<%= request.getContextPath() %>/board/addok">
+<form method="post" action="<%= request.getContextPath() %>/board/addok" enctype="multipart/form-data">
     <div class="row ">
         <h2>새 글 작성</h2>
         <div class="col">
@@ -184,6 +184,11 @@
         <label for="contents">내용</label>
         <textarea class="form-control" id="contents" name="contents" placeholder="내용" rows="10" required></textarea>
         <div class="validate-note">내용을 입력하세요.</div>
+    </div>
+
+    <div class="">
+        <label for="uploadfile">파일</label>
+        <input type="file" class="form-control" id="uploadfile" name="uploadfile" />
     </div>
 
     <!-- hidden input for subject value -->

@@ -26,8 +26,8 @@
     </select>
 
     <insert id="insertBoard" parameterType="com.example.board.BoardVO">
-        INSERT INTO BOARD (userid, title, professor, contents, subject)
-        VALUES (#{userid}, #{title}, #{professor}, #{contents}, #{subject})
+        INSERT INTO BOARD (userid, title, professor, contents, subject, file_name, file_path)
+        VALUES (#{userid}, #{title}, #{professor}, #{contents}, #{subject}, #{fileName}, #{filePath})
     </insert>
 
     <update id="updateBoard" parameterType="com.example.board.BoardVO">
