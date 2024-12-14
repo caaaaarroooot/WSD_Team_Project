@@ -130,7 +130,7 @@
 <div class="container mt-4">
     <!-- 상단 버튼 섹션 -->
     <div class="top-buttons d-flex justify-content-between align-items-center">
-        <a href="${pageContext.request.contextPath}/board/list" class="btn btn-secondary">목록으로 이동</a>
+        <a href="${pageContext.request.contextPath}/board/list?subjectName=${board.subject}" class="btn btn-secondary">목록으로 이동</a>
         <div>
             <!-- 수정 및 삭제 버튼: 로그인 유저와 게시글 작성자가 동일할 경우에만 표시 -->
             <c:if test="${sessionScope.userId eq board.userid}">
