@@ -33,7 +33,7 @@
     <update id="updateBoard" parameterType="com.example.board.BoardVO">
         UPDATE BOARD
         SET title = #{title},
-        userid = #{userid},
+        professor = #{professor},
         contents = #{contents},
         regdate = NOW()
         WHERE id = #{id}

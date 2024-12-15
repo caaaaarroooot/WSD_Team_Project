@@ -156,9 +156,9 @@
 
     <div class="row mb-3">
         <div class="col-md-6">
-            <label for="userid">작성자</label>
-            <tr><td><form:input path="userid"/></td></tr>
-            <div class="validate-note">작성자 이름을 입력하세요.</div>
+            <label for="professor">교수님</label>
+            <tr><td><form:input path="professor"/></td></tr>
+            <div class="validate-note">교수님 성함을 입력하세요.</div>
         </div>
     </div>
 
