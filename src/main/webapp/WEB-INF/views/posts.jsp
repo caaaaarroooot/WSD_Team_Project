@@ -131,8 +131,8 @@
 							${u.regdate}
 						<img src="../img/view.png" width="30px" style="margin: 0 5px;"/>
 							${u.view}
-						<img src="../img/like.png" width="25px" style="margin: 0 5px;"/>
-							${u.like}
+<%--						<img src="../img/like.png" width="25px" style="margin: 0 5px;"/>--%>
+<%--							${u.like}--%>
 					</div>
 				</div>
 			</div>
